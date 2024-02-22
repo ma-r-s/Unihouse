@@ -7,6 +7,7 @@
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
 	import { Slider } from '$lib/components/ui/slider';
+	import { Separator } from '$lib/components/ui/separator';
 
 	const sizes = ['Small', 'Medium', 'Large', 'X-Large'];
 	let size = '';
@@ -18,12 +19,13 @@
 	let distance = [maxDist];
 </script>
 
-<div class="flex items-center justify-between p-8">
+<div class="mb-6 flex items-center justify-between">
 	<h1 class="text-2xl font-bold">Unihousing</h1>
 	<Toggle />
 </div>
 
-<div class="flex items-center justify-center gap-4" variant="ghost">
+<div class="mb-6 flex items-center gap-4">
+	<p class="font-semibold">Filter:</p>
 	<Popover.Root>
 		<Popover.Trigger>
 			<Button>Price</Button>
@@ -60,8 +62,8 @@
 		</Select.Content>
 	</Select.Root>
 </div>
-
-<Card.Root class="m-8 w-72">
+<Separator class="mb-6" />
+<Card.Root class=" w-72">
 	<Card.Header>
 		<Card.Title>Card Title</Card.Title>
 		<Card.Description>Card Description</Card.Description>
