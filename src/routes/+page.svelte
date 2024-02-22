@@ -2,44 +2,53 @@
 	import Toggle from '$lib/Toggle.svelte';
 	import * as Card from '$lib/components/ui/card';
 	import * as Select from '$lib/components/ui/select';
+	import * as Popover from '$lib/components/ui/popover';
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
 	import { Slider } from '$lib/components/ui/slider';
+
 	const sizes = ['Small', 'Medium', 'Large', 'X-Large'];
 	let size = '';
-	let min;
-	let max;
-	let distance = [5, 8];
+	let minPrice = 0.5;
+	let maxPrice = 5;
+	let price = [minPrice, maxPrice];
+
+	let maxDist = 10;
+	let distance = [maxDist];
 </script>
 
 <div class="flex items-center justify-between p-8">
 	<h1 class="text-2xl font-bold">Unihousing</h1>
 	<Toggle />
 </div>
+
 <div class="flex items-center justify-center gap-4" variant="ghost">
-	<div class="flex items-center gap-2">
-		<Input
-			bind:value={min}
-			type="number"
-			min="500000"
-			max={max || 4000000}
-			step="100000"
-			placeholder="Min"
-			class="w-28"
-		/>
-		-
-		<Input
-			bind:value={max}
-			type="number"
-			min={min || 500000}
-			max="4000000"
-			step="100000"
-			placeholder="Max"
-			class="w-28"
-		/>
-	</div>
-	<Slider bind:value={distance} max={10} step={0.1} class="w-44" />
+	<Popover.Root>
+		<Popover.Trigger>
+			<Button>Price</Button>
+		</Popover.Trigger>
+		<Popover.Content>
+			<div class="mb-4 flex w-full justify-between">
+				<p>Min: {price[0]} M</p>
+				<p>Max: {price[1]} M</p>
+			</div>
+			<Slider bind:value={price} min={minPrice} max={maxPrice} step={0.1} class="w-full" />
+		</Popover.Content>
+	</Popover.Root>
+
+	<Popover.Root>
+		<Popover.Trigger>
+			<Button>Distance</Button>
+		</Popover.Trigger>
+		<Popover.Content>
+			<div class="mb-4 flex w-full justify-between">
+				<p>Max: {distance[0]} km</p>
+			</div>
+			<Slider bind:value={distance} max={maxDist} step={0.1} class="w-full" />
+		</Popover.Content>
+	</Popover.Root>
+
 	<Select.Root bind:selected={size}>
 		<Select.Trigger class="w-32">
 			<Select.Value placeholder="Sizes" />
@@ -51,9 +60,9 @@
 		</Select.Content>
 	</Select.Root>
 </div>
+
 <Card.Root class="m-8 w-72">
 	<Card.Header>
-		{min} - {max}
 		<Card.Title>Card Title</Card.Title>
 		<Card.Description>Card Description</Card.Description>
 	</Card.Header>
