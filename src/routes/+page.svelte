@@ -7,7 +7,7 @@
 </script>
 
 <Toggle />
-<article class="prose-sm prose container my-10">
+<article class="prose-sm prose dark:prose-invert container my-10">
 	<h1>Garlic bread with cheese: What the science tells us</h1>
 	<p>
 		For years parents have espoused the health benefits of eating garlic bread with cheese to their
@@ -18,5 +18,4 @@
 		But a recent study shows that the celebrated appetizer may be linked to a series of rabies cases
 		springing up around the country.
 	</p>
-	<!-- ... -->
 </article>
