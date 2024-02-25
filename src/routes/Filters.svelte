@@ -14,7 +14,7 @@
 	let distance = [maxDist];
 </script>
 
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
 	<p class="font-semibold">Filter:</p>
 	<Popover.Root>
 		<Popover.Trigger>
