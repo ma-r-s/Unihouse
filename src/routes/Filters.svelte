@@ -14,11 +14,21 @@
 	let distance = [maxDist];
 </script>
 
-<div class="flex items-center gap-4 overflow-x-auto [&::-webkit-scrollbar]:hidden">
+<div class="flex items-center gap-4 overflow-auto p-1 [&::-webkit-scrollbar]:hidden">
 	<p class="font-semibold">Filter:</p>
 	<Popover.Root>
 		<Popover.Trigger>
-			<Button>Price</Button>
+			<Button>
+				{#if price[0] === minPrice && price[1] === maxPrice}
+					Price
+				{:else if price[0] === minPrice}
+					Max: {price[1]} M
+				{:else if price[1] === maxPrice}
+					Min: {price[0]} M
+				{:else}
+					{price[0]}M - {price[1]}M
+				{/if}
+			</Button>
 		</Popover.Trigger>
 		<Popover.Content>
 			<div class="mb-4 flex w-full justify-between">
@@ -31,7 +41,13 @@
 
 	<Popover.Root>
 		<Popover.Trigger>
-			<Button>Distance</Button>
+			<Button>
+				{#if distance[0] === maxDist}
+					Distance
+				{:else}
+					Max: {distance[0]} km
+				{/if}
+			</Button>
 		</Popover.Trigger>
 		<Popover.Content>
 			<div class="mb-4 flex w-full justify-between">
@@ -42,7 +58,7 @@
 	</Popover.Root>
 
 	<Select.Root bind:selected={size}>
-		<Select.Trigger class="w-32">
+		<Select.Trigger class="w-32 shrink-0">
 			<Select.Value placeholder="Sizes" />
 		</Select.Trigger>
 		<Select.Content>
