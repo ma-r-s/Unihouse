@@ -8,7 +8,7 @@
 </script>
 
 <div class="mb-6 flex items-center gap-4">
-	<h1 class="hidden text-2xl font-bold sm:block">Unihousing</h1>
+	<h1 class="hidden text-2xl font-bold sm:block">Unihouse</h1>
 	<Logo class="h-8 w-8" />
 	<div class="flex-grow"></div>
 	<Button variant="outline" href="/login">Login</Button>
