@@ -15,17 +15,15 @@
 	import * as Select from '$lib/components/ui/select';
 	export let form;
 	export let formData;
-
 	const df = new DateFormatter('en-US', {
 		dateStyle: 'long'
 	});
 
-	let value;
-	$: value = $formData.dob ? parseDate($formData.dob) : undefined;
-
 	let placeholder = today(getLocalTimeZone());
+	let years = Array.from({ length: 100 }, (_, index) => new Date().getFullYear() - index);
+	let year = { value: placeholder.year, label: placeholder.year, disabled: false };
 
-	const years = Array.from({ length: 10 }, (_, index) => new Date().getFullYear() - index);
+	$: value = $formData.dob ? parseDate($formData.dob) : undefined;
 </script>
 
 <Form.Field {form} name="dob" class="flex flex-col">
@@ -43,23 +41,26 @@
 				{value ? df.format(value.toDate(getLocalTimeZone())) : 'Pick a date'}
 				<CalendarIcon class="ml-auto h-4 w-4 opacity-50" />
 			</Popover.Trigger>
-			<Popover.Content class="w-auto p-0" side="top">
+			<Popover.Content class="flex w-auto flex-col items-center p-0" side="top">
 				<Select.Root
-					{years}
-					onSelectedChange={(v) => {
-						if (!v) return;
-						value = new CalendarDate(v.value, today(getLocalTimeZone()).month, 1);
+					bind:selected={year}
+					onSelectedChange={(e) => {
+						placeholder = new CalendarDate(e.value, placeholder.month, 1);
 					}}
 				>
-					<Select.Trigger class="w-24">
-						<Select.Value placeholder="Select" />
+					<Select.Trigger class="mt-4 w-40">
+						<Select.Value placeholder="Select a year" />
 					</Select.Trigger>
-					<Select.Content>
-						{#each years as year}
-							<Select.Item value={year}>{year}</Select.Item>
-						{/each}
+					<Select.Content class="h-40 overflow-y-auto [&::-webkit-scrollbar]:hidden">
+						<Select.Group>
+							<Select.Label>Years</Select.Label>
+							{#each years as year}
+								<Select.Item value={year} label={year}>{year}</Select.Item>
+							{/each}
+						</Select.Group>
 					</Select.Content>
 				</Select.Root>
+
 				<Calendar
 					{value}
 					bind:placeholder
@@ -74,10 +75,13 @@
 							$formData.dob = '';
 						}
 					}}
+					onPlaceholderChange={(p) => {
+						year = { value: p.year, label: p.year, disabled: false };
+					}}
 				/>
 			</Popover.Content>
 		</Popover.Root>
-		<Form.Description>Your date of birth is used to calculate your age.</Form.Description>
+		<Form.Description>Your date of birth is used to calculator your age</Form.Description>
 		<Form.FieldErrors />
 		<input hidden value={$formData.dob} name={attrs.name} />
 	</Form.Control>
