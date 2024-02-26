@@ -1,6 +1,6 @@
 <script>
-	import SettingsForm from './form.svelte';
+	import Form from './form.svelte';
 	export let data;
 </script>
 
-<SettingsForm data={data.form} />
+<Form data={data.form} />

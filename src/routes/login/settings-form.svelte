@@ -1,11 +1,10 @@
 <script>
 	import * as Form from '$lib/components/ui/form';
 	import { Input } from '$lib/components/ui/input';
-	import { formSchema } from './schema.js';
+	import { formSchema } from './schema';
 	import { superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import SuperDebug from 'sveltekit-superforms';
-	import CalendarInput from './CalendarInput.svelte';
 
 	export let data;
 
@@ -17,7 +16,7 @@
 </script>
 
 <form method="POST" use:enhance>
-	<Form.Field {form} name="username" class="mb-4">
+	<Form.Field {form} name="username">
 		<Form.Control let:attrs>
 			<Form.Label>Username</Form.Label>
 			<Input {...attrs} bind:value={$formData.username} />
@@ -25,8 +24,7 @@
 		<Form.Description>This is your public display name.</Form.Description>
 		<Form.FieldErrors />
 	</Form.Field>
-	<CalendarInput {form} {formData}></CalendarInput>
 	<Form.Button>Submit</Form.Button>
 </form>
-
 <SuperDebug data={$formData} />
+```
