@@ -13,7 +13,11 @@ export async function handle({ event, resolve }) {
 		// clear the auth store on failed refresh
 		event.locals.pb.authStore.clear();
 	}
-
+	if (event.locals.pb.authStore.isValid) {
+		event.locals.user = structuredClone(event.locals.pb.authStore.model);
+	} else {
+		event.locals.user = undefined;
+	}
 	const response = await resolve(event);
 
 	// send back the default 'pb_auth' cookie to the client with the latest store state

@@ -3,6 +3,7 @@ import { superValidate } from 'sveltekit-superforms';
 import { formSchema } from './schema';
 import { zod } from 'sveltekit-superforms/adapters';
 import { error } from '@sveltejs/kit';
+
 export const load = async () => {
 	return {
 		form: await superValidate(zod(formSchema))
@@ -18,11 +19,12 @@ export const actions = {
 			});
 		}
 		try {
-			await event.locals.pb.collection('users').create(form.data);
-			await event.locals.pb.collection('users').requestVerification(form.data.email);
+			await event.locals.pb
+				.collection('users')
+				.authWithPassword(form.data.email, form.data.password);
 		} catch (e) {
 			console.log('Error: ', e);
-			error(500, { message: 'Failed to create user.' });
+			error(500, { message: 'Failed to log in user.' });
 		}
 		redirect(303, '/');
 	}
