@@ -28,13 +28,13 @@
 
 <Form.Field {form} name="dob" class="flex flex-col">
 	<Form.Control let:attrs>
-		<Form.Label>Date of birth</Form.Label>
+		<Form.Label class="!text-black">Date of birth</Form.Label>
 		<Popover.Root>
 			<Popover.Trigger
 				{...attrs}
 				class={cn(
 					buttonVariants({ variant: 'outline' }),
-					'w-[280px] justify-start pl-4 text-left font-normal',
+					'justify-start pl-4 text-left font-normal',
 					!value && 'text-muted-foreground'
 				)}
 			>
@@ -81,7 +81,7 @@
 				/>
 			</Popover.Content>
 		</Popover.Root>
-		<Form.Description>Your date of birth is used to calculator your age</Form.Description>
+		<!-- <Form.Description>Your date of birth is used to calculator your age.</Form.Description> -->
 		<Form.FieldErrors />
 		<input hidden value={$formData.dob} name={attrs.name} />
 	</Form.Control>
