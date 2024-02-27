@@ -4,7 +4,7 @@
 	import { formSchema } from './schema.js';
 	import { superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
-	import SuperDebug from 'sveltekit-superforms';
+	// import SuperDebug from 'sveltekit-superforms';
 	import CalendarInput from './CalendarInput.svelte';
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	export let data;
@@ -89,5 +89,5 @@
 		</Form.Control>
 	</Form.Field>
 	<Form.Button>Submit</Form.Button>
-	<SuperDebug data={$formData} />
+	<!-- <SuperDebug data={$formData} /> -->
 </form>
