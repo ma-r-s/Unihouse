@@ -7,7 +7,6 @@
 	import '../app.pcss';
 	import { ModeWatcher } from 'mode-watcher';
 	export let data;
-	$: console.log(data);
 </script>
 
 <ModeWatcher />

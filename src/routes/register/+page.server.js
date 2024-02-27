@@ -11,6 +11,7 @@ export const load = async () => {
 
 export const actions = {
 	default: async (event) => {
+		console.log(event);
 		const form = await superValidate(event, zod(formSchema));
 		if (!form.valid) {
 			return fail(400, {
