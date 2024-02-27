@@ -1,6 +1,6 @@
 import PocketBase from 'pocketbase';
 
-export async function handle({ event, resolve }) {
+export async function handle({ cookies, resolve }) {
 	event.locals.pb = new PocketBase('https://uni.pockethost.io');
 
 	// load the store data from the request cookie string
