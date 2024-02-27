@@ -18,7 +18,7 @@
 		</a>
 		<div class="flex-grow"></div>
 		{#if !data.user}
-			<Button class="hidden sm:block" variant="outline" href="/login">Login</Button>
+			<Button class="hidden sm:block" variant="outline">Login</Button>
 			<Button class="hidden sm:block" variant="outline" href="/register">Register</Button>
 			<Toggle />
 			<DropdownMenu.Root>
@@ -26,7 +26,7 @@
 					<Button class="sm:hidden" variant="ghost" builders={[builder]}><Menu /></Button>
 				</DropdownMenu.Trigger>
 				<DropdownMenu.Content class="w-56">
-					<DropdownMenu.Item href="/login">Login</DropdownMenu.Item>
+					<DropdownMenu.Item>Login</DropdownMenu.Item>
 					<DropdownMenu.Item href="/register">Register</DropdownMenu.Item>
 				</DropdownMenu.Content>
 			</DropdownMenu.Root>
