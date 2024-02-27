@@ -28,7 +28,7 @@
 
 <Form.Field {form} name="dob" class="flex flex-col">
 	<Form.Control let:attrs>
-		<Form.Label class="!text-black">Date of birth</Form.Label>
+		<Form.Label>Date of birth</Form.Label>
 		<Popover.Root>
 			<Popover.Trigger
 				{...attrs}

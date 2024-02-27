@@ -19,7 +19,7 @@
 <form method="POST" class="flex flex-col gap-4 sm:w-96" use:enhance>
 	<Form.Field {form} name="name">
 		<Form.Control let:attrs>
-			<Form.Label class="!text-black">Name</Form.Label>
+			<Form.Label>Name</Form.Label>
 			<Input {...attrs} bind:value={$formData.name} placeholder="Enter your name" />
 		</Form.Control>
 		<!-- <Form.Description>This is your full name.</Form.Description> -->
@@ -27,7 +27,7 @@
 	</Form.Field>
 	<Form.Field {form} name="email">
 		<Form.Control let:attrs>
-			<Form.Label class="!text-black">Email</Form.Label>
+			<Form.Label>Email</Form.Label>
 			<Input {...attrs} bind:value={$formData.email} placeholder="Enter your email" />
 		</Form.Control>
 		<!-- <Form.Description>We will email you to verify your account.</Form.Description> -->
@@ -36,14 +36,41 @@
 
 	<Form.Field {form} name="username">
 		<Form.Control let:attrs>
-			<Form.Label class="!text-black">Username</Form.Label>
+			<Form.Label>Username</Form.Label>
 			<Input {...attrs} bind:value={$formData.username} placeholder="Choose a unique username" />
 		</Form.Control>
 		<!-- <Form.Description>This is your public display name.</Form.Description> -->
 		<Form.FieldErrors />
 	</Form.Field>
-
 	<CalendarInput {form} {formData}></CalendarInput>
+
+	<Form.Field {form} name="password">
+		<Form.Control let:attrs>
+			<Form.Label>Password</Form.Label>
+			<Input
+				{...attrs}
+				bind:value={$formData.password}
+				type="password"
+				placeholder="Enter your password"
+			/>
+		</Form.Control>
+		<!-- <Form.Description>Choose a strong password.</Form.Description> -->
+		<Form.FieldErrors />
+	</Form.Field>
+
+	<Form.Field {form} name="passwordConfirm">
+		<Form.Control let:attrs>
+			<Form.Label>Confirm Password</Form.Label>
+			<Input
+				{...attrs}
+				bind:value={$formData.passwordConfirm}
+				type="password"
+				placeholder="Confirm your password"
+			/>
+		</Form.Control>
+		<!-- <Form.Description>Confirm your password.</Form.Description> -->
+		<Form.FieldErrors />
+	</Form.Field>
 
 	<Form.Field
 		{form}
