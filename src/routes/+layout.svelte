@@ -12,8 +12,10 @@
 <ModeWatcher />
 <div class="container py-10">
 	<div class="mb-6 flex gap-4">
-		<h1 class="text-2xl font-bold">Unihouse</h1>
-		<Logo class="h-8 w-8 shrink-0" />
+		<a href="/" class="flex gap-2">
+			<h1 class="text-2xl font-bold">Unihouse</h1>
+			<Logo class="h-8 w-8 shrink-0" />
+		</a>
 		<div class="flex-grow"></div>
 		{#if !data.user}
 			<Button class="hidden sm:block" variant="outline" href="/login">Login</Button>

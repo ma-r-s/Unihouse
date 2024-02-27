@@ -1,5 +1,5 @@
 <script>
-	import Form from './form.svelte';
+	import Form from './Form.svelte';
 	export let data;
 </script>
 
