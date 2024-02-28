@@ -18,7 +18,7 @@
 	<p class="font-semibold">Filter:</p>
 	<Popover.Root>
 		<Popover.Trigger>
-			<Button>
+			<Button class="w-28">
 				{#if price[0] === minPrice && price[1] === maxPrice}
 					Price
 				{:else if price[0] === minPrice}
@@ -41,7 +41,7 @@
 
 	<Popover.Root>
 		<Popover.Trigger>
-			<Button>
+			<Button class="w-28">
 				{#if distance[0] === maxDist}
 					Distance
 				{:else}

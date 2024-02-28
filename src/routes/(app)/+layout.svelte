@@ -4,6 +4,7 @@
 	import Unihouse from '$lib/Unihouse.svelte';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import Menu from '~icons/material-symbols/menu-rounded';
+	import Account from '~icons/material-symbols/account-circle-full';
 	export let data;
 </script>
 
@@ -25,15 +26,22 @@
 				</DropdownMenu.Content>
 			</DropdownMenu.Root>
 		{:else}
-			<Button class="hidden sm:block" variant="link" href="/publish">Become a Host</Button>
-			<Button class="hidden sm:block" variant="link" href="/settings">Settings</Button>
+			<Button class="hidden sm:block" variant="link" href="/publish">Host</Button>
+			<Button class="hidden sm:block" variant="link" href="/logout">Log Out</Button>
+			<Button class="hidden sm:flex " variant="ghost" size="icon" href="/account">
+				<Account class="h-4 w-4" />
+			</Button>
+			<Toggle />
 			<DropdownMenu.Root>
 				<DropdownMenu.Trigger asChild let:builder>
-					<Button class="sm:hidden" variant="ghost" builders={[builder]}><Menu /></Button>
+					<Button class="sm:hidden" size="icon" variant="ghost" builders={[builder]}
+						><Menu /></Button
+					>
 				</DropdownMenu.Trigger>
 				<DropdownMenu.Content class="w-56">
-					<DropdownMenu.Item href="/publish">Become a Host</DropdownMenu.Item>
-					<DropdownMenu.Item href="/settings">Account Settings</DropdownMenu.Item>
+					<DropdownMenu.Item href="/publish">Host</DropdownMenu.Item>
+					<DropdownMenu.Item href="/account">Account</DropdownMenu.Item>
+					<DropdownMenu.Item href="/logout">Log Out</DropdownMenu.Item>
 				</DropdownMenu.Content>
 			</DropdownMenu.Root>
 		{/if}
