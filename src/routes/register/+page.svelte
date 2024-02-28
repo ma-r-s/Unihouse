@@ -16,6 +16,12 @@
 	const { form: formData, enhance } = form;
 </script>
 
+<h2 class="mb-4 text-xl font-bold">Sign Up</h2>
+<p class="mb-6">
+	Or
+	<a href="/login" class="underline">log in</a>
+	if you alredy have an account.
+</p>
 <form method="POST" class="flex flex-col gap-4 sm:w-96" use:enhance>
 	<Form.Field {form} name="name">
 		<Form.Control let:attrs>
