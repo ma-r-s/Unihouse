@@ -4,7 +4,12 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Slider } from '$lib/components/ui/slider';
 
-	const sizes = ['Small', 'Medium', 'Large', 'X-Large'];
+	const sizes = [
+		{ label: 'Small', value: 'sm' },
+		{ label: 'Medium', value: 'md' },
+		{ label: 'Large', value: 'lg' },
+		{ label: 'X-Large', value: 'xl' }
+	];
 	let size = '';
 	let minPrice = 0.5;
 	let maxPrice = 5;
@@ -63,7 +68,7 @@
 		</Select.Trigger>
 		<Select.Content>
 			{#each sizes as size}
-				<Select.Item value={size}>{size}</Select.Item>
+				<Select.Item value={size.value}>{size.label}</Select.Item>
 			{/each}
 		</Select.Content>
 	</Select.Root>
