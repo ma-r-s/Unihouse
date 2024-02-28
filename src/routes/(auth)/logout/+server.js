@@ -1,7 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 
-export async function load({ locals }) {
-	locals.user = undefined;
+export const GET = ({ locals }) => {
 	locals.pb.authStore.clear();
+	locals.user = undefined;
 	redirect(303, '/login');
-}
+};
