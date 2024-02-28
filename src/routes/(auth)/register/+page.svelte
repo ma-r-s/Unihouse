@@ -22,7 +22,7 @@
 	<a href="/login" class="underline">log in</a>
 	if you alredy have an account.
 </p>
-<form method="POST" class="flex flex-col gap-4 sm:w-96" use:enhance>
+<form method="POST" class="flex flex-col gap-4" use:enhance>
 	<Form.Field {form} name="name">
 		<Form.Control let:attrs>
 			<Form.Label>Name</Form.Label>
