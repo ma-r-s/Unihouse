@@ -20,7 +20,7 @@
 	<a href="/register" class="underline">sign up</a>
 	if you don't have an account yet.
 </p>
-<form method="POST" class="flex flex-col gap-4 sm:w-96" use:enhance>
+<form method="POST" class="flex flex-col gap-4" use:enhance>
 	<Form.Field {form} name="email">
 		<Form.Control let:attrs>
 			<Form.Label>Email</Form.Label>
