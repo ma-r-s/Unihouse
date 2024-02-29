@@ -39,7 +39,7 @@
 				)}
 			>
 				{value ? df.format(value.toDate(getLocalTimeZone())) : 'Pick a date'}
-				<CalendarIcon class="ml-auto h-4 w-4 opacity-50" />
+				<CalendarIcon class="ml-auto size-4 opacity-50" />
 			</Popover.Trigger>
 			<Popover.Content class="flex w-auto flex-col items-center p-0" side="top">
 				<Select.Root

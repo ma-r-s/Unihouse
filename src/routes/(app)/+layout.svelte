@@ -29,7 +29,7 @@
 			<Button class="hidden sm:block" variant="link" href="/publish">Host</Button>
 			<Button class="hidden sm:block" variant="link" href="/logout">Log Out</Button>
 			<Button class="hidden sm:flex " variant="ghost" size="icon" href="/account">
-				<Account class="h-4 w-4" />
+				<Account class="size-4" />
 			</Button>
 			<Toggle />
 			<DropdownMenu.Root>

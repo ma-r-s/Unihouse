@@ -6,7 +6,7 @@
 </script>
 
 <Button on:click={toggleMode} variant="ghost" size="icon">
-	<Sun class="h-4 w-4 dark:hidden" />
-	<Moon class="hidden h-4 w-4 dark:block" />
+	<Sun class="size-4 dark:hidden" />
+	<Moon class="hidden size-4 dark:block" />
 	<span class="sr-only">Toggle theme</span>
 </Button>
