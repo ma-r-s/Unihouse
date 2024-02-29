@@ -6,6 +6,7 @@
 	import { formSchema } from './schema.js';
 	import { superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
+	import { Textarea } from '$lib/components/ui/textarea';
 
 	export let data;
 
@@ -21,84 +22,105 @@
 	];
 	let minPrice = 500000;
 	let maxPrice = 5000000;
-	$formData.price = 500000;
+	$formData.price = null;
 </script>
 
-<h2 class="mb-4 text-xl font-bold">Create House Listing</h2>
+<div class="flex w-full flex-col items-center">
+	<h2 class="mb-4 w-fit text-xl font-bold">Create House Listing</h2>
+	<form
+		method="POST"
+		class="flex w-full flex-col justify-center gap-4 md:w-1/2"
+		use:enhance
+		enctype="multipart/form-data"
+	>
+		<Form.Field {form} name="name">
+			<Form.Control let:attrs>
+				<Form.Label>Name</Form.Label>
+				<Input {...attrs} bind:value={$formData.name} placeholder="Enter the name" />
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
 
-<form method="POST" class="flex flex-col gap-4" use:enhance enctype="multipart/form-data">
-	<Form.Field {form} name="name">
-		<Form.Control let:attrs>
-			<Form.Label>Name</Form.Label>
-			<Input {...attrs} bind:value={$formData.name} placeholder="Enter the name" />
-		</Form.Control>
-		<Form.FieldErrors />
-	</Form.Field>
+		<Form.Field {form} name="description">
+			<Form.Control let:attrs>
+				<Form.Label>Description</Form.Label>
+				<Textarea
+					{...attrs}
+					bind:value={$formData.description}
+					placeholder="Enter the description"
+				/>
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
 
-	<Form.Field {form} name="description">
-		<Form.Control let:attrs>
-			<Form.Label>Description</Form.Label>
-			<Input {...attrs} bind:value={$formData.description} placeholder="Enter the description" />
-		</Form.Control>
-		<Form.FieldErrors />
-	</Form.Field>
+		<Form.Field {form} name="address">
+			<Form.Control let:attrs>
+				<Form.Label>Address</Form.Label>
+				<Input {...attrs} bind:value={$formData.address} placeholder="Enter the address" />
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
 
-	<Form.Field {form} name="address">
-		<Form.Control let:attrs>
-			<Form.Label>Address</Form.Label>
-			<Input {...attrs} bind:value={$formData.address} placeholder="Enter the address" />
-		</Form.Control>
-		<Form.FieldErrors />
-	</Form.Field>
+		<Form.Field {form} name="price">
+			<Form.Control let:attrs>
+				<Form.Label>Price</Form.Label>
+				<Input
+					{...attrs}
+					type="number"
+					min={minPrice}
+					max={maxPrice}
+					step={100000}
+					bind:value={$formData.price}
+					placeholder="Enter the price"
+				/>
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
 
-	<Form.Field {form} name="price">
-		<Form.Control let:attrs>
-			<Form.Label>Price</Form.Label>
-			<Input
-				{...attrs}
-				type="number"
-				min={minPrice}
-				max={maxPrice}
-				step={100000}
-				bind:value={$formData.price}
-				placeholder="Enter the price"
-			/>
-		</Form.Control>
-		<Form.FieldErrors />
-	</Form.Field>
+		<Form.Field {form} name="size">
+			<Form.Control let:attrs>
+				<Form.Label>Size</Form.Label>
+				<Select.Root
+					onSelectedChange={(v) => {
+						v && ($formData.size = v.value);
+					}}
+				>
+					<Select.Trigger {...attrs}>
+						<Select.Value placeholder="Sizes" />
+					</Select.Trigger>
+					<Select.Content>
+						{#each sizes as size}
+							<Select.Item value={size.value} label={size.label} />
+						{/each}
+					</Select.Content>
+				</Select.Root>
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
 
-	<Form.Field {form} name="size">
-		<Form.Control let:attrs>
-			<Form.Label>Size</Form.Label>
-			<Select.Root
-				onSelectedChange={(v) => {
-					v && ($formData.size = v.value);
-				}}
-			>
-				<Select.Trigger {...attrs}>
-					<Select.Value placeholder="Sizes" />
-				</Select.Trigger>
-				<Select.Content>
-					{#each sizes as size}
-						<Select.Item value={size.value} label={size.label} />
-					{/each}
-				</Select.Content>
-			</Select.Root>
-		</Form.Control>
-		<Form.FieldErrors />
-	</Form.Field>
+		<Form.Field {form} name="pictures">
+			<Form.Control let:attrs>
+				<Form.Label>Upload Pictures</Form.Label>
+				<Input
+					type="file"
+					multiple
+					{...attrs}
+					on:input={(e) => ($formData.pictures = Array.from(e.currentTarget.files ?? []))}
+				/>
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
 
-	<Form.Field {form} name="pictures">
-		<Form.Control let:attrs>
-			<Form.Label>Upload Pictures</Form.Label>
-			<Input
-				type="file"
-				multiple
-				{...attrs}
-				on:input={(e) => ($formData.pictures = Array.from(e.currentTarget.files ?? []))}
-			/>
-		</Form.Control>
-		<Form.FieldErrors />
-	</Form.Field>
-	<Form.Button>Submit</Form.Button>
-</form>
+		<div class="flex flex-wrap gap-4">
+			{#each $formData.pictures as picture, index}
+				<img
+					src={URL.createObjectURL(picture)}
+					alt={`Preview ${index + 1}`}
+					class="h-32 w-32 object-cover"
+				/>
+			{/each}
+		</div>
+
+		<Form.Button>Submit</Form.Button>
+	</form>
+</div>

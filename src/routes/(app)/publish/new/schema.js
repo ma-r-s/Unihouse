@@ -9,17 +9,17 @@ const sizeInMB = (sizeInBytes, decimalsNum = 2) => {
 };
 
 export const formSchema = z.object({
-	name: z.string().min(5),
-	description: z.string(),
-	address: z.string(),
-	price: z.coerce.number(),
+	name: z.string().min(5).max(100),
+	description: z.string().min(20).max(300),
+	address: z.string().min(8).max(52),
+	price: z.coerce.number().min(500000).max(5000000),
 	size: z.enum(['sm', 'md', 'lg', 'xl']),
 	pictures: z
 		.instanceof(File, { message: 'Please upload a file.' })
 		.refine((f) => sizeInMB(f.size) <= MAX_IMAGE_SIZE, 'Max 100 kB upload size.')
 		.refine((f) => ACCEPTED_IMAGE_TYPES.includes(f.type), 'Unsupported file type.')
 		.array()
-		.refine((files) => files.length !== 0, 'Image is required')
+		.refine((files) => files.length !== 0, 'At least one image is required')
 		.refine(
 			(files) => files.length <= MAX_NUM_PICTURES,
 			`Maximum number of pictures is ${MAX_NUM_PICTURES}`
