@@ -6,7 +6,6 @@
 	import { formSchema } from './schema.js';
 	import { superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
-	import { FileInput } from '$lib/components/ui/file-input';
 
 	export let data;
 
@@ -92,7 +91,9 @@
 	<Form.Field {form} name="pictures">
 		<Form.Control let:attrs>
 			<Form.Label>Upload Pictures</Form.Label>
-			<FileInput
+			<Input
+				type="file"
+				multiple
 				{...attrs}
 				on:input={(e) => ($formData.pictures = Array.from(e.currentTarget.files ?? []))}
 			/>
