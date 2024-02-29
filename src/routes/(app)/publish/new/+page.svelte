@@ -6,6 +6,7 @@
 	import { formSchema } from './schema.js';
 	import { superForm } from 'sveltekit-superforms';
 	import { zodClient } from 'sveltekit-superforms/adapters';
+	import { FileInput } from '$lib/components/ui/file-input';
 
 	export let data;
 
@@ -19,6 +20,9 @@
 		{ label: 'Large', value: 'lg' },
 		{ label: 'X-Large', value: 'xl' }
 	];
+	let minPrice = 500000;
+	let maxPrice = 5000000;
+	$formData.price = 500000;
 </script>
 
 <h2 class="mb-4 text-xl font-bold">Create House Listing</h2>
@@ -51,7 +55,15 @@
 	<Form.Field {form} name="price">
 		<Form.Control let:attrs>
 			<Form.Label>Price</Form.Label>
-			<Input {...attrs} type="number" bind:value={$formData.price} placeholder="Enter the price" />
+			<Input
+				{...attrs}
+				type="number"
+				min={minPrice}
+				max={maxPrice}
+				step={100000}
+				bind:value={$formData.price}
+				placeholder="Enter the price"
+			/>
 		</Form.Control>
 		<Form.FieldErrors />
 	</Form.Field>
@@ -59,13 +71,17 @@
 	<Form.Field {form} name="size">
 		<Form.Control let:attrs>
 			<Form.Label>Size</Form.Label>
-			<Select.Root bind:selected={$formData.size}>
+			<Select.Root
+				onSelectedChange={(v) => {
+					v && ($formData.size = v.value);
+				}}
+			>
 				<Select.Trigger {...attrs}>
 					<Select.Value placeholder="Sizes" />
 				</Select.Trigger>
 				<Select.Content>
 					{#each sizes as size}
-						<Select.Item value={size.value}>{size.label}</Select.Item>
+						<Select.Item value={size.value} label={size.label} />
 					{/each}
 				</Select.Content>
 			</Select.Root>
@@ -76,15 +92,12 @@
 	<Form.Field {form} name="pictures">
 		<Form.Control let:attrs>
 			<Form.Label>Upload Pictures</Form.Label>
-			<Input
+			<FileInput
 				{...attrs}
-				on:input={(e) => ($formData.pictures = e.currentTarget.files ?? null)}
-				type="file"
-				multiple
+				on:input={(e) => ($formData.pictures = Array.from(e.currentTarget.files ?? []))}
 			/>
 		</Form.Control>
 		<Form.FieldErrors />
 	</Form.Field>
-
 	<Form.Button>Submit</Form.Button>
 </form>

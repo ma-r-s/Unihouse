@@ -1,10 +1,13 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { superValidate } from 'sveltekit-superforms';
+import { superValidate, withFiles } from 'sveltekit-superforms';
 import { formSchema } from './schema';
 import { zod } from 'sveltekit-superforms/adapters';
 import { error } from '@sveltejs/kit';
 
-export const load = async () => {
+export const load = async ({ locals }) => {
+	if (!locals.pb.authStore.isValid) {
+		redirect(303, '/login');
+	}
 	return {
 		form: await superValidate(zod(formSchema))
 	};
@@ -13,18 +16,13 @@ export const load = async () => {
 export const actions = {
 	default: async (event) => {
 		const form = await superValidate(event, zod(formSchema));
-		if (!form.valid) {
-			return fail(400, {
-				form
-			});
-		}
+		if (!form.valid) return fail(400, withFiles({ form }));
+		form.data.user = event.locals.user.id;
 		try {
-			await event.locals.pb
-				.collection('users')
-				.authWithPassword(form.data.email, form.data.password);
+			await event.locals.pb.collection('posts').create(form.data);
 		} catch (e) {
 			console.log('Error: ', e);
-			error(500, { message: 'Failed to log in user.' });
+			error(500, { message: 'Failed to create listing.' });
 		}
 		redirect(303, '/');
 	}

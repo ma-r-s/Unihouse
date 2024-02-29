@@ -1,6 +1,7 @@
 import { z } from 'zod';
 const ACCEPTED_IMAGE_TYPES = ['image/png', 'image/jpg', 'image/jpeg'];
 const MAX_IMAGE_SIZE = 4; //In MegaBytes
+const MAX_NUM_PICTURES = 20;
 
 const sizeInMB = (sizeInBytes, decimalsNum = 2) => {
 	const result = sizeInBytes / (1024 * 1024);
@@ -8,22 +9,19 @@ const sizeInMB = (sizeInBytes, decimalsNum = 2) => {
 };
 
 export const formSchema = z.object({
-	email: z.string().email(),
-	password: z.string(),
-	name: z.string(),
+	name: z.string().min(5),
 	description: z.string(),
 	address: z.string(),
-	price: z.number(),
-	size: z.enum(['small', 'medium', 'large', 'x-large']),
+	price: z.coerce.number(),
+	size: z.enum(['sm', 'md', 'lg', 'xl']),
 	pictures: z
-		.custom()
-		.refine((files) => {
-			return Array.from(files ?? []).length !== 0;
-		}, 'Image is required')
-		.refine((files) => {
-			return Array.from(files ?? []).every((file) => sizeInMB(file.size) <= MAX_IMAGE_SIZE);
-		}, `The maximum image size is ${MAX_IMAGE_SIZE}MB`)
-		.refine((files) => {
-			return Array.from(files ?? []).every((file) => ACCEPTED_IMAGE_TYPES.includes(file.type));
-		}, 'File type is not supported')
+		.instanceof(File, { message: 'Please upload a file.' })
+		.refine((f) => sizeInMB(f.size) <= MAX_IMAGE_SIZE, 'Max 100 kB upload size.')
+		.refine((f) => ACCEPTED_IMAGE_TYPES.includes(f.type), 'Unsupported file type.')
+		.array()
+		.refine((files) => files.length !== 0, 'Image is required')
+		.refine(
+			(files) => files.length <= MAX_NUM_PICTURES,
+			`Maximum number of pictures is ${MAX_NUM_PICTURES}`
+		)
 });
