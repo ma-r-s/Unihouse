@@ -5,13 +5,13 @@
 	import { Input } from '$lib/components/ui/input';
 	import { formSchema } from './schema.js';
 	import { superForm } from 'sveltekit-superforms';
-	import { zodClient } from 'sveltekit-superforms/adapters';
+	import { valibotClient } from 'sveltekit-superforms/adapters';
 	import { Textarea } from '$lib/components/ui/textarea';
 
 	export let data;
 
 	const form = superForm(data.form, {
-		validators: zodClient(formSchema)
+		validators: valibotClient(formSchema)
 	});
 	const { form: formData, enhance } = form;
 	const sizes = [
@@ -23,6 +23,9 @@
 	let minPrice = 500000;
 	let maxPrice = 5000000;
 	$formData.price = null;
+
+	let size = null;
+	$: $formData.size = size?.value;
 </script>
 
 <div class="flex w-full flex-col items-center">
@@ -76,15 +79,11 @@
 			</Form.Control>
 			<Form.FieldErrors />
 		</Form.Field>
-
+		{$formData.size}
 		<Form.Field {form} name="size">
 			<Form.Control let:attrs>
 				<Form.Label>Size</Form.Label>
-				<Select.Root
-					onSelectedChange={(v) => {
-						v && ($formData.size = v.value);
-					}}
-				>
+				<Select.Root bind:selected={size}>
 					<Select.Trigger {...attrs}>
 						<Select.Value placeholder="Sizes" />
 					</Select.Trigger>

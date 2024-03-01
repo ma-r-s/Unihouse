@@ -1,18 +1,18 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
 import { formSchema } from './schema';
-import { zod } from 'sveltekit-superforms/adapters';
+import { valibot } from 'sveltekit-superforms/adapters';
 import { error } from '@sveltejs/kit';
 
 export const load = async () => {
 	return {
-		form: await superValidate(zod(formSchema))
+		form: await superValidate(valibot(formSchema))
 	};
 };
 
 export const actions = {
 	default: async (event) => {
-		const form = await superValidate(event, zod(formSchema));
+		const form = await superValidate(event, valibot(formSchema));
 		if (!form.valid) {
 			return fail(400, {
 				form

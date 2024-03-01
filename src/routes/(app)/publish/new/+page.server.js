@@ -1,7 +1,7 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { superValidate, withFiles } from 'sveltekit-superforms';
 import { formSchema } from './schema';
-import { zod } from 'sveltekit-superforms/adapters';
+import { valibot } from 'sveltekit-superforms/adapters';
 import { error } from '@sveltejs/kit';
 
 export const load = async ({ locals }) => {
@@ -9,13 +9,14 @@ export const load = async ({ locals }) => {
 		redirect(303, '/login');
 	}
 	return {
-		form: await superValidate(zod(formSchema))
+		form: await superValidate(valibot(formSchema))
 	};
 };
 
 export const actions = {
 	default: async (event) => {
-		const form = await superValidate(event, zod(formSchema));
+		const form = await superValidate(event, valibot(formSchema));
+		console.log(form.data.size);
 		if (!form.valid) return fail(400, withFiles({ form }));
 		form.data.user = event.locals.user.id;
 		try {

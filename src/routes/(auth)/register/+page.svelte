@@ -3,14 +3,14 @@
 	import { Input } from '$lib/components/ui/input';
 	import { formSchema } from './schema.js';
 	import { superForm } from 'sveltekit-superforms';
-	import { zodClient } from 'sveltekit-superforms/adapters';
+	import { valibotClient } from 'sveltekit-superforms/adapters';
 	// import SuperDebug from 'sveltekit-superforms';
 	import CalendarInput from './CalendarInput.svelte';
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	export let data;
 
 	const form = superForm(data.form, {
-		validators: zodClient(formSchema)
+		validators: valibotClient(formSchema)
 	});
 
 	const { form: formData, enhance } = form;
