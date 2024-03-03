@@ -13,7 +13,15 @@
 	const form = superForm(data.form, {
 		validators: valibotClient(formSchema)
 	});
+
 	const { form: formData, enhance } = form;
+
+	$: selectedSize = $formData.size
+		? {
+				label: $formData.size,
+				value: $formData.size
+			}
+		: undefined;
 	const sizes = [
 		{ label: 'Small', value: 'sm' },
 		{ label: 'Medium', value: 'md' },
@@ -23,9 +31,6 @@
 	let minPrice = 500000;
 	let maxPrice = 5000000;
 	$formData.price = null;
-
-	let size = null;
-	$: $formData.size = size?.value;
 </script>
 
 <div class="flex w-full flex-col items-center">
@@ -79,11 +84,16 @@
 			</Form.Control>
 			<Form.FieldErrors />
 		</Form.Field>
-		{$formData.size}
+
 		<Form.Field {form} name="size">
 			<Form.Control let:attrs>
 				<Form.Label>Size</Form.Label>
-				<Select.Root bind:selected={size}>
+				<Select.Root
+					selected={selectedSize}
+					onSelectedChange={(v) => {
+						v && ($formData.size = v.value);
+					}}
+				>
 					<Select.Trigger {...attrs}>
 						<Select.Value placeholder="Sizes" />
 					</Select.Trigger>
@@ -93,6 +103,7 @@
 						{/each}
 					</Select.Content>
 				</Select.Root>
+				<input hidden bind:value={$formData.size} name={attrs.name} />
 			</Form.Control>
 			<Form.FieldErrors />
 		</Form.Field>
