@@ -4,11 +4,19 @@
 	import { formSchema } from './schema.js';
 	import { superForm } from 'sveltekit-superforms';
 	import { valibotClient } from 'sveltekit-superforms/adapters';
-	// import SuperDebug from 'sveltekit-superforms';
+	import { toast } from 'svelte-sonner';
 	export let data;
 
 	const form = superForm(data.form, {
-		validators: valibotClient(formSchema)
+		validators: valibotClient(formSchema),
+		onUpdated: ({ form: f }) => {
+			if (!f.valid) {
+				toast.error('Please fix the errors in the form.');
+			}
+		},
+		onError: ({ error }) => {
+			toast.error(error.message);
+		}
 	});
 
 	const { form: formData, enhance } = form;

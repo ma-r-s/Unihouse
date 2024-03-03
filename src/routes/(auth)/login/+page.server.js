@@ -1,4 +1,4 @@
-import { fail, redirect } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
 import { formSchema } from './schema';
 import { valibot } from 'sveltekit-superforms/adapters';
@@ -13,9 +13,7 @@ export const actions = {
 	default: async (event) => {
 		const form = await superValidate(event, valibot(formSchema));
 		if (!form.valid) {
-			return fail(400, {
-				form
-			});
+			error(400, { message: 'Invalid form data.' });
 		}
 		try {
 			await event.locals.pb
@@ -23,7 +21,7 @@ export const actions = {
 				.authWithPassword(form.data.email, form.data.password);
 		} catch (e) {
 			console.log('Error: ', e);
-			error(500, { message: 'Failed to log in user.' });
+			error(500, { message: 'The server is not available' });
 		}
 		redirect(303, '/');
 	}
