@@ -1,18 +1,5 @@
-import {
-	email,
-	maxLength,
-	minLength,
-	object,
-	string,
-	date,
-	maxValue,
-	coerce,
-	custom,
-	forward,
-	literal
-} from 'valibot';
+import { email, maxLength, minLength, object, string, custom, forward, literal } from 'valibot';
 import moment from 'moment';
-const now = moment();
 export const formSchema = object(
 	{
 		name: string([
@@ -26,10 +13,12 @@ export const formSchema = object(
 			maxLength(50, 'Your username must have 50 characters or less.')
 		]),
 		passwordConfirm: string(),
-		dob: coerce(
-			date([maxValue(now.subtract(18, 'years'), 'You need to be at least 18 to register')]),
-			(d) => new Date(d)
-		),
+		dob: string([
+			custom(
+				(dob) => moment().subtract(18, 'years').isAfter(moment(dob)),
+				'You must be at least 18 to register'
+			)
+		]),
 		terms: literal(true)
 	},
 	[
