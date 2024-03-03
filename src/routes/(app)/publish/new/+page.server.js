@@ -16,7 +16,6 @@ export const load = async ({ locals }) => {
 export const actions = {
 	default: async (event) => {
 		const form = await superValidate(event, valibot(formSchema));
-		console.log(form.data.size);
 		if (!form.valid) return fail(400, withFiles({ form }));
 		form.data.user = event.locals.user.id;
 		try {
