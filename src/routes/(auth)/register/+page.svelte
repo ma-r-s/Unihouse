@@ -10,6 +10,7 @@
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import CalendarIcon from '~icons/material-symbols/calendar-today-outline-rounded';
 	import CalendarMonthYear from '$lib/CalendarMonthYear.svelte';
+	import { toast } from 'svelte-sonner';
 	import {
 		DateFormatter,
 		getLocalTimeZone,
@@ -20,7 +21,15 @@
 	export let data;
 
 	const form = superForm(data.form, {
-		validators: valibotClient(formSchema)
+		validators: valibotClient(formSchema),
+		onUpdated: ({ form: f }) => {
+			if (!f.valid) {
+				toast.error('Please fix the errors in the form.');
+			}
+		},
+		onError: ({ result }) => {
+			toast.error(result.error.message);
+		}
 	});
 
 	const { form: formData, enhance } = form;

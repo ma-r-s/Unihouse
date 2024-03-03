@@ -1,5 +1,5 @@
-import { fail, redirect } from '@sveltejs/kit';
-import { superValidate, withFiles } from 'sveltekit-superforms';
+import { redirect } from '@sveltejs/kit';
+import { superValidate } from 'sveltekit-superforms';
 import { formSchema } from './schema';
 import { valibot } from 'sveltekit-superforms/adapters';
 import { error } from '@sveltejs/kit';
@@ -16,13 +16,15 @@ export const load = async ({ locals }) => {
 export const actions = {
 	default: async (event) => {
 		const form = await superValidate(event, valibot(formSchema));
-		if (!form.valid) return fail(400, withFiles({ form }));
+		if (!form.valid) error(400, { message: 'Invalid form data.' });
 		form.data.user = event.locals.user.id;
 		try {
 			await event.locals.pb.collection('posts').create(form.data);
 		} catch (e) {
 			console.log('Error: ', e);
-			error(500, { message: 'Failed to create listing.' });
+			error(500, {
+				message: 'Server error on ' + Object.keys(e.response.data).join(', ')
+			});
 		}
 		redirect(303, '/');
 	}

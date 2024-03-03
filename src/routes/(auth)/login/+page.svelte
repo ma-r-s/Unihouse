@@ -14,8 +14,8 @@
 				toast.error('Please fix the errors in the form.');
 			}
 		},
-		onError: ({ error }) => {
-			toast.error(error.message);
+		onError: ({ result }) => {
+			toast.error(result.error.message);
 		}
 	});
 

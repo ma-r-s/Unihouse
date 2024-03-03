@@ -21,7 +21,7 @@ export const actions = {
 				.authWithPassword(form.data.email, form.data.password);
 		} catch (e) {
 			console.log('Error: ', e);
-			error(500, { message: 'The server is not available' });
+			error(500, { message: e.message });
 		}
 		redirect(303, '/');
 	}
