@@ -3,17 +3,37 @@
 	import { Input } from '$lib/components/ui/input';
 	import { formSchema } from './schema.js';
 	import { superForm } from 'sveltekit-superforms';
-	import { zodClient } from 'sveltekit-superforms/adapters';
+	import { valibotClient } from 'sveltekit-superforms/adapters';
 	// import SuperDebug from 'sveltekit-superforms';
-	import CalendarInput from './CalendarInput.svelte';
+	import { cn } from '$lib/utils';
+	import { buttonVariants } from '$lib/components/ui/button';
+	import * as Popover from '$lib/components/ui/popover';
 	import { Checkbox } from '$lib/components/ui/checkbox';
+	import CalendarIcon from '~icons/material-symbols/calendar-today-outline-rounded';
+	import CalendarMonthYear from '$lib/CalendarMonthYear.svelte';
+	import {
+		DateFormatter,
+		getLocalTimeZone,
+		parseDate,
+		CalendarDate,
+		today
+	} from '@internationalized/date';
 	export let data;
 
 	const form = superForm(data.form, {
-		validators: zodClient(formSchema)
+		validators: valibotClient(formSchema)
 	});
 
 	const { form: formData, enhance } = form;
+	const df = new DateFormatter('en-US', {
+		dateStyle: 'long'
+	});
+
+	let value;
+
+	$: value = $formData.dob ? parseDate($formData.dob) : undefined;
+
+	let placeholder = today(getLocalTimeZone());
 </script>
 
 <h2 class="mb-4 text-xl font-bold">Sign Up</h2>
@@ -48,7 +68,45 @@
 		<!-- <Form.Description>This is your public display name.</Form.Description> -->
 		<Form.FieldErrors />
 	</Form.Field>
-	<CalendarInput {form} {formData}></CalendarInput>
+
+	<Form.Field {form} name="dob" class="flex flex-col">
+		<Form.Control let:attrs>
+			<Form.Label>Date of birth</Form.Label>
+			<Popover.Root>
+				<Popover.Trigger
+					{...attrs}
+					class={cn(
+						buttonVariants({ variant: 'outline' }),
+						' justify-start pl-4 text-left font-normal',
+						!value && 'text-muted-foreground'
+					)}
+				>
+					{value ? df.format(value.toDate(getLocalTimeZone())) : 'Pick a date'}
+					<CalendarIcon class="ml-auto h-4 w-4 opacity-50" />
+				</Popover.Trigger>
+				<Popover.Content class="w-auto p-0" side="top">
+					<CalendarMonthYear
+						{value}
+						bind:placeholder
+						minValue={new CalendarDate(1900, 1, 1)}
+						maxValue={today(getLocalTimeZone())}
+						calendarLabel="Date of birth"
+						initialFocus
+						onValueChange={(v) => {
+							if (v) {
+								$formData.dob = v.toString();
+							} else {
+								$formData.dob = '';
+							}
+						}}
+					/>
+				</Popover.Content>
+			</Popover.Root>
+			<Form.Description>Your date of birth is used to calculator your age</Form.Description>
+			<Form.FieldErrors />
+			<input hidden value={$formData.dob} name={attrs.name} />
+		</Form.Control>
+	</Form.Field>
 
 	<Form.Field {form} name="password">
 		<Form.Control let:attrs>

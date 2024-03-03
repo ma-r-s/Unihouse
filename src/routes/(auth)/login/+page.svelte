@@ -3,12 +3,13 @@
 	import { Input } from '$lib/components/ui/input';
 	import { formSchema } from './schema.js';
 	import { superForm } from 'sveltekit-superforms';
-	import { zodClient } from 'sveltekit-superforms/adapters';
+	import { valibotClient } from 'sveltekit-superforms/adapters';
 	// import SuperDebug from 'sveltekit-superforms';
 	export let data;
 
 	const form = superForm(data.form, {
-		validators: zodClient(formSchema)
+		validators: valibotClient(formSchema),
+		abortPipeEarly: true
 	});
 
 	const { form: formData, enhance } = form;

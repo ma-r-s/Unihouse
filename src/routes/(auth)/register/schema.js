@@ -1,16 +1,30 @@
-import { z } from 'zod';
-
-export const formSchema = z
-	.object({
-		name: z.string().min(2).max(100),
-		email: z.string().email(),
-		username: z.string().min(5).max(50),
-		dob: z.string().refine((v) => v, { message: 'A date of birth is required.' }),
-		password: z.string().min(8).max(52),
-		passwordConfirm: z.string(),
-		terms: z.literal(true)
-	})
-	.refine((data) => data.password === data.passwordConfirm, {
-		message: "Passwords don't match",
-		path: ['passwordConfirm'] // path of error
-	});
+import { email, maxLength, minLength, object, string, custom, forward, literal } from 'valibot';
+import moment from 'moment';
+export const formSchema = object(
+	{
+		name: string([
+			minLength(1, 'Please enter your name.'),
+			maxLength(100, 'Your name must have 100 characters or less.')
+		]),
+		email: string([email('Please enter a correct email.')]),
+		password: string([minLength(8, 'Your password must have 8 characters or more.')]),
+		username: string([
+			minLength(1, 'Please enter your username.'),
+			maxLength(50, 'Your username must have 50 characters or less.')
+		]),
+		passwordConfirm: string(),
+		dob: string([
+			custom(
+				(dob) => moment().subtract(18, 'years').isAfter(moment(dob)),
+				'You must be at least 18 to register'
+			)
+		]),
+		terms: literal(true)
+	},
+	[
+		forward(
+			custom((data) => data.password === data.passwordConfirm, "Passwords don't match"),
+			['passwordConfirm']
+		)
+	]
+);
