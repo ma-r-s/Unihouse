@@ -35,6 +35,8 @@
 	"type": "module",
 	"dependencies": {
 		"@internationalized/date": "^3.5.2",
+		"@vercel/analytics": "^1.2.2",
+		"@vercel/speed-insights": "^1.0.10",
 		"bits-ui": "^0.18.3",
 		"clsx": "^2.1.0",
 		"embla-carousel-svelte": "^8.0.0",
