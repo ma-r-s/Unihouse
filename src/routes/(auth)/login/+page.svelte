@@ -5,6 +5,8 @@
 	import { superForm } from 'sveltekit-superforms';
 	import { valibotClient } from 'sveltekit-superforms/adapters';
 	import { toast } from 'svelte-sonner';
+	import Loading from '~icons/material-symbols/progress-activity';
+
 	export let data;
 
 	const form = superForm(data.form, {
@@ -19,7 +21,7 @@
 		}
 	});
 
-	const { form: formData, enhance } = form;
+	const { form: formData, enhance, delayed } = form;
 </script>
 
 <h2 class="mb-4 text-xl font-bold">Log In</h2>
@@ -52,6 +54,12 @@
 		<Form.FieldErrors />
 	</Form.Field>
 
-	<Form.Button>Submit</Form.Button>
+	<Form.Button>
+		{#if $delayed}
+			<Loading class="size-4 animate-spin" />
+		{:else}
+			Submit
+		{/if}
+	</Form.Button>
 	<!-- <SuperDebug data={$formData} /> -->
 </form>

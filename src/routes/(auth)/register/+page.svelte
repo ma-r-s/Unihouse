@@ -18,6 +18,8 @@
 		CalendarDate,
 		today
 	} from '@internationalized/date';
+	import Loading from '~icons/material-symbols/progress-activity';
+
 	export let data;
 
 	const form = superForm(data.form, {
@@ -32,7 +34,7 @@
 		}
 	});
 
-	const { form: formData, enhance } = form;
+	const { form: formData, enhance, delayed } = form;
 	const df = new DateFormatter('en-US', {
 		dateStyle: 'long'
 	});
@@ -160,6 +162,12 @@
 			<input name={attrs.name} value={$formData.mobile} hidden />
 		</Form.Control>
 	</Form.Field>
-	<Form.Button>Submit</Form.Button>
+	<Form.Button>
+		{#if $delayed}
+			<Loading class="size-4 animate-spin" />
+		{:else}
+			Submit
+		{/if}
+	</Form.Button>
 	<!-- <SuperDebug data={$formData} /> -->
 </form>
