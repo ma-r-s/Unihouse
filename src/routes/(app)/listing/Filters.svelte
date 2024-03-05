@@ -10,13 +10,12 @@
 		{ label: 'Large', value: 'lg' },
 		{ label: 'X-Large', value: 'xl' }
 	];
-	let size = '';
+	export let size = '';
 	let minPrice = 0.5;
 	let maxPrice = 5;
-	let price = [minPrice, maxPrice];
-
+	export let price = [minPrice, maxPrice];
 	let maxDist = 10;
-	let distance = [maxDist];
+	export let distance = [maxDist];
 </script>
 
 <div class="flex items-center gap-4 overflow-auto p-1 [&::-webkit-scrollbar]:hidden">
