@@ -1,38 +1,41 @@
-# create-svelte
+# UniHouse
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+UniHouse is a web application designed for university students in Bogota to find affordable and comfortable housing options. The goal of this project is to provide a platform where students can connect with each other and find roommates who are also university students.
 
-## Creating a project
+## Technologies Used
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Framework: Svelte
+- Metaframework: SvelteKit
+- Premade Components: Shadcn-Svelte
+- Styling: Tailwind CSS
+- Form Submitting and Verification: Superforms and Formsnap
+- Validation Library: Valibot
+- Database: Pockebase
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Features
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- User registration and authentication
+- Search and filter housing options
+- Connect with potential roommates
+- Secure and reliable database storage
 
-## Developing
+## Getting Started
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+To get started with UniHouse, follow these steps:
 
-```bash
-npm run dev
+1. Clone the repository: `git clone https://github.com/your-username/UniHouse.git`
+2. Install the dependencies: `npm install`
+3. Start the development server: `npm run dev`
+4. Open your browser and navigate to `http://localhost:5173`
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## Contributing
 
-## Building
+We welcome contributions from the community! If you'd like to contribute to UniHouse, please follow our [contribution guidelines](CONTRIBUTING.md).
 
-To create a production version of your app:
+## License
 
-```bash
-npm run build
-```
+This project is licensed under the [MIT License](LICENSE).
 
-You can preview the production build with `npm run preview`.
+## Contact
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+If you have any questions or suggestions, feel free to reach out to us at [contact@example.com](mailto:contact@example.com).
