@@ -38,4 +38,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-If you have any questions or suggestions, feel free to reach out to us at [contact@example.com](mailto:contact@example.com).
+If you have any questions or suggestions, feel free to reach out to us at [reachmars.vercel.app](reachmars.vercel.app).
