@@ -9,6 +9,9 @@
 	import { t } from '$lib/translations';
 
 	export let data;
+	$: {
+		console.log(data);
+	}
 </script>
 
 <div class="container py-10">

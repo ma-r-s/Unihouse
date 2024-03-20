@@ -22,14 +22,14 @@ export const load = async ({ url, cookies, request, locals }) => {
 	await loadTranslations(locale, pathname); // keep this just before the `return`
 	if (locals.user) {
 		return {
+			user: locals.user,
 			i18n: { locale, route: pathname },
-			translations: translations.get(),
-			user: locals.user
+			translations: translations.get()
 		};
 	}
 	return {
+		user: undefined,
 		i18n: { locale, route: pathname },
-		translations: translations.get(),
-		user: undefined
+		translations: translations.get()
 	};
 };
