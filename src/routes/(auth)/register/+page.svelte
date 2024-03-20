@@ -9,6 +9,7 @@
 	import * as Popover from '$lib/components/ui/popover';
 	import { Checkbox } from '$lib/components/ui/checkbox';
 	import CalendarIcon from '~icons/material-symbols/calendar-today-outline-rounded';
+	import { t } from '$lib/translations.js';
 	import CalendarMonthYear from '$lib/CalendarMonthYear.svelte';
 	import { toast } from 'svelte-sonner';
 	import {
@@ -46,25 +47,25 @@
 	let placeholder = today(getLocalTimeZone());
 </script>
 
-<h2 class="mb-4 text-xl font-bold">Sign Up</h2>
+<h2 class="mb-4 text-xl font-bold">{$t('register')}</h2>
 <p class="mb-6">
-	Or
-	<a href="/login" class="underline">log in</a>
-	if you alredy have an account.
+	{$t('or')}
+	<a href="/login" class="underline">{$t('log in')}</a>
+	{$t('yes account')}
 </p>
 <form method="POST" class="flex flex-col gap-4" use:enhance>
 	<Form.Field {form} name="name">
 		<Form.Control let:attrs>
-			<Form.Label>Name</Form.Label>
-			<Input {...attrs} bind:value={$formData.name} placeholder="Enter your name" />
+			<Form.Label>{$t('name')}</Form.Label>
+			<Input {...attrs} bind:value={$formData.name} placeholder={$t('p-name')} />
 		</Form.Control>
 		<!-- <Form.Description>This is your full name.</Form.Description> -->
 		<Form.FieldErrors />
 	</Form.Field>
 	<Form.Field {form} name="email">
 		<Form.Control let:attrs>
-			<Form.Label>Email</Form.Label>
-			<Input {...attrs} bind:value={$formData.email} placeholder="Enter your email" />
+			<Form.Label>{$t('email')}</Form.Label>
+			<Input {...attrs} bind:value={$formData.email} placeholder={$t('p-email')} />
 		</Form.Control>
 		<!-- <Form.Description>We will email you to verify your account.</Form.Description> -->
 		<Form.FieldErrors />
@@ -72,8 +73,8 @@
 
 	<Form.Field {form} name="username">
 		<Form.Control let:attrs>
-			<Form.Label>Username</Form.Label>
-			<Input {...attrs} bind:value={$formData.username} placeholder="Choose a unique username" />
+			<Form.Label>{$t('username')}</Form.Label>
+			<Input {...attrs} bind:value={$formData.username} placeholder={$t('p-username')} />
 		</Form.Control>
 		<!-- <Form.Description>This is your public display name.</Form.Description> -->
 		<Form.FieldErrors />
@@ -81,7 +82,7 @@
 
 	<Form.Field {form} name="dob" class="flex flex-col">
 		<Form.Control let:attrs>
-			<Form.Label>Date of birth</Form.Label>
+			<Form.Label>{$t('dob')}</Form.Label>
 			<Popover.Root>
 				<Popover.Trigger
 					{...attrs}
@@ -91,7 +92,7 @@
 						!value && 'text-muted-foreground'
 					)}
 				>
-					{value ? df.format(value.toDate(getLocalTimeZone())) : 'Pick a date'}
+					{value ? df.format(value.toDate(getLocalTimeZone())) : $t('p-dob')}
 					<CalendarIcon class="ml-auto size-4 opacity-50" />
 				</Popover.Trigger>
 				<Popover.Content class="w-auto p-0" side="top">
@@ -112,7 +113,7 @@
 					/>
 				</Popover.Content>
 			</Popover.Root>
-			<Form.Description>Your date of birth is used to calculator your age</Form.Description>
+			<Form.Description>{$t('d-dob')}</Form.Description>
 			<Form.FieldErrors />
 			<input hidden value={$formData.dob} name={attrs.name} />
 		</Form.Control>
@@ -120,12 +121,12 @@
 
 	<Form.Field {form} name="password">
 		<Form.Control let:attrs>
-			<Form.Label>Password</Form.Label>
+			<Form.Label>{$t('password')}</Form.Label>
 			<Input
 				{...attrs}
 				bind:value={$formData.password}
 				type="password"
-				placeholder="Enter your password"
+				placeholder={$t('p-password')}
 			/>
 		</Form.Control>
 		<!-- <Form.Description>Choose a strong password.</Form.Description> -->
@@ -134,12 +135,12 @@
 
 	<Form.Field {form} name="passwordConfirm">
 		<Form.Control let:attrs>
-			<Form.Label>Confirm Password</Form.Label>
+			<Form.Label>{$t('confirmPassword')}</Form.Label>
 			<Input
 				{...attrs}
 				bind:value={$formData.passwordConfirm}
 				type="password"
-				placeholder="Confirm your password"
+				placeholder={$t('p-confirmPassword')}
 			/>
 		</Form.Control>
 		<!-- <Form.Description>Confirm your password.</Form.Description> -->
@@ -154,9 +155,9 @@
 		<Form.Control let:attrs>
 			<Checkbox {...attrs} bind:checked={$formData.terms} />
 			<div class="space-y-1 leading-none">
-				<Form.Label>Accept terms and conditions</Form.Label>
+				<Form.Label>{$t('terms')}</Form.Label>
 				<Form.Description>
-					You can change your mind at any time by visiting your account settings.
+					{$t('d-terms')}
 				</Form.Description>
 			</div>
 			<input name={attrs.name} value={$formData.mobile} hidden />
@@ -166,7 +167,7 @@
 		{#if $delayed}
 			<Loading class="size-4 animate-spin" />
 		{:else}
-			Submit
+			{$t('register')}
 		{/if}
 	</Form.Button>
 	<!-- <SuperDebug data={$formData} /> -->

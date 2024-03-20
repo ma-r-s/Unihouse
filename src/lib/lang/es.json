@@ -15,5 +15,18 @@
 	"email": "Correo",
 	"p-email": "Ingresa tu correo",
 	"password": "Contraseña",
-	"p-password": "Ingresa tu contraseña"
+	"p-password": "Ingresa tu contraseña",
+	"log in": "inicia sesión",
+	"yes account": "si ya tienes cuenta",
+	"name": "Nombre",
+	"p-name": "Ingresa tu nombre",
+	"username": "Nombre de usuario",
+	"p-username": "Ingresa tu nombre de usuario",
+	"dob": "Fecha de nacimiento",
+	"p-dob": "Ingresa tu fecha de nacimiento",
+	"d-dob": "Debes ser mayor de 18 años para registrarte",
+	"confirmPassword": "Re-ingresa tu contraseña",
+	"p-confirmPassword": "Re-ingresa tu contraseña",
+	"terms": "Aceptar términos y condiciones",
+	"d-terms": "Puedes cambiar tu configuración en cualquier momento"
 }

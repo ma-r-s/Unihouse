@@ -15,5 +15,18 @@
 	"email": "Email",
 	"p-email": "Enter your email",
 	"password": "Password",
-	"p-password": "Enter your password"
+	"p-password": "Enter your password",
+	"log in": "log in",
+	"yes account": "if you already have an account.",
+	"name": "Name",
+	"p-name": "Enter your name",
+	"username": "Username",
+	"p-username": "Choose a unique username",
+	"dob": "Date of Birth",
+	"p-dob": "Enter your date of birth",
+	"d-dob": "Your date of birth is used to calculate your age",
+	"confirmPassword": "Confirm Password",
+	"p-confirmPassword": "Re-enter your password",
+	"terms": "Accept terms and conditions",
+	"d-terms": "You can change your mind at any time by visiting your account settings."
 }
