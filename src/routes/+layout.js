@@ -12,12 +12,6 @@ export const load = async ({ url }) => {
 
 function getInitialLocale() {
 	if (browser) {
-		try {
-			return window.navigator.language.split('-')[0];
-		} catch (e) {
-			return 'es';
-		}
+		return 'es';
 	}
-
-	return 'es';
 }
