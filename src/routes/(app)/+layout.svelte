@@ -33,9 +33,9 @@
 				</DropdownMenu.Content>
 			</DropdownMenu.Root>
 		{:else}
-			<Button class="hidden sm:block" variant="link" href="/publish">Host</Button>
+			<Button class="hidden sm:block" variant="link" href="/publish/new">Host</Button>
 			<Button class="hidden sm:block" variant="link" href="/logout">Log Out</Button>
-			<Button class="hidden sm:flex " variant="ghost" size="icon" href="/account">
+			<Button class="hidden sm:flex " variant="ghost" size="icon" href="/account/gastos">
 				<Account class="size-4" />
 			</Button>
 			<Toggle />
@@ -47,8 +47,8 @@
 					>
 				</DropdownMenu.Trigger>
 				<DropdownMenu.Content class="w-56">
-					<DropdownMenu.Item href="/publish">Host</DropdownMenu.Item>
-					<DropdownMenu.Item href="/account">Account</DropdownMenu.Item>
+					<DropdownMenu.Item href="/publish/new">Host</DropdownMenu.Item>
+					<DropdownMenu.Item href="/account/gastos">Account</DropdownMenu.Item>
 					<DropdownMenu.Item href="/logout">Log Out</DropdownMenu.Item>
 				</DropdownMenu.Content>
 			</DropdownMenu.Root>
