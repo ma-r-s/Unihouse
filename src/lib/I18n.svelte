@@ -3,6 +3,10 @@
 	import Lang from '~icons/material-symbols/language';
 	import { locale } from '$lib/translations';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
+	const handleChange = (lang) => {
+		$locale = lang;
+		document.cookie = `lang=${lang} ;`;
+	};
 </script>
 
 <DropdownMenu.Root>
@@ -12,7 +16,7 @@
 		</Button>
 	</DropdownMenu.Trigger>
 	<DropdownMenu.Content align="end">
-		<DropdownMenu.Item on:click={() => ($locale = 'es')}>Español</DropdownMenu.Item>
-		<DropdownMenu.Item on:click={() => ($locale = 'en')}>English</DropdownMenu.Item>
+		<DropdownMenu.Item on:click={() => handleChange('es')}>Español</DropdownMenu.Item>
+		<DropdownMenu.Item on:click={() => handleChange('en')}>English</DropdownMenu.Item>
 	</DropdownMenu.Content>
 </DropdownMenu.Root>

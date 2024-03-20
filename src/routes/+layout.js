@@ -1,17 +1,11 @@
-import { browser } from '$app/environment';
 import { loadTranslations } from '$lib/translations';
 
-export const load = async ({ url }) => {
+export const load = async ({ url, data }) => {
 	const { pathname } = url;
-	const initLocale = getInitialLocale();
+	const { i18n } = data;
+	const { locale } = i18n;
 
-	await loadTranslations(initLocale, pathname);
+	await loadTranslations(locale, pathname);
 
-	return { locale: initLocale, route: pathname };
+	return { locale: locale, route: pathname };
 };
-
-function getInitialLocale() {
-	if (browser) {
-		return 'es';
-	}
-}

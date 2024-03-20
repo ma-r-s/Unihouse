@@ -1,7 +1,7 @@
 import i18n from 'sveltekit-i18n';
 
 const config = {
-	initLocale: 'es',
+	initLocale: 'en',
 	loaders: [
 		{
 			locale: 'en',
