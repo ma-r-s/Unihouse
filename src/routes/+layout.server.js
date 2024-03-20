@@ -1,4 +1,4 @@
-import { locales, loadTranslations, translations, defaultLocale } from '$lib/translations';
+import { locales, loadTranslations, translations } from '$lib/translations';
 export const load = async ({ url, cookies, request, locals }) => {
 	const { pathname } = url;
 
@@ -16,7 +16,7 @@ export const load = async ({ url, cookies, request, locals }) => {
 
 	// Use default locale if current locale is not supported
 	if (!supportedLocales.includes(locale)) {
-		locale = defaultLocale;
+		locale = 'en';
 	}
 
 	await loadTranslations(locale, pathname); // keep this just before the `return`
