@@ -27,15 +27,15 @@
 
 <h2 class="mb-4 text-xl font-bold">{$t('login')}</h2>
 <p class="mb-6">
-	Or
-	<a href="/register" class="underline">sign up</a>
-	if you don't have an account yet.
+	{$t('or')}
+	<a href="/register" class="underline">{$t('sign up')}</a>
+	{$t('not account')}
 </p>
 <form method="POST" class="flex flex-col gap-4" use:enhance>
 	<Form.Field {form} name="email">
 		<Form.Control let:attrs>
-			<Form.Label>Email</Form.Label>
-			<Input {...attrs} bind:value={$formData.email} placeholder="Enter your email" />
+			<Form.Label>{$t('email')}</Form.Label>
+			<Input {...attrs} bind:value={$formData.email} placeholder={$t('p-email')} />
 		</Form.Control>
 		<!-- <Form.Description>We will email you to verify your account.</Form.Description> -->
 		<Form.FieldErrors />
@@ -43,12 +43,12 @@
 
 	<Form.Field {form} name="password">
 		<Form.Control let:attrs>
-			<Form.Label>Password</Form.Label>
+			<Form.Label>{$t('password')}</Form.Label>
 			<Input
 				{...attrs}
 				bind:value={$formData.password}
 				type="password"
-				placeholder="Enter your password"
+				placeholder={$t('p-password')}
 			/>
 		</Form.Control>
 		<!-- <Form.Description>Choose a strong password.</Form.Description> -->
@@ -59,7 +59,7 @@
 		{#if $delayed}
 			<Loading class="size-4 animate-spin" />
 		{:else}
-			Submit
+			{$t('login')}
 		{/if}
 	</Form.Button>
 	<!-- <SuperDebug data={$formData} /> -->

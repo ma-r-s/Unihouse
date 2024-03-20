@@ -8,5 +8,12 @@
 	"medium": "Medium",
 	"large": "Large",
 	"xlarge": "X-Large",
-	"filter": "Filter"
+	"filter": "Filter",
+	"or": "Or",
+	"sign up": "sign up",
+	"not account": "if you don't have an account yet.",
+	"email": "Email",
+	"p-email": "Enter your email",
+	"password": "Password",
+	"p-password": "Enter your password"
 }
