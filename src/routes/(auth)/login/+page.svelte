@@ -6,6 +6,7 @@
 	import { valibotClient } from 'sveltekit-superforms/adapters';
 	import { toast } from 'svelte-sonner';
 	import Loading from '~icons/material-symbols/progress-activity';
+	import { t } from '$lib/translations';
 
 	export let data;
 
@@ -24,7 +25,7 @@
 	const { form: formData, enhance, delayed } = form;
 </script>
 
-<h2 class="mb-4 text-xl font-bold">Log In</h2>
+<h2 class="mb-4 text-xl font-bold">{$t('login')}</h2>
 <p class="mb-6">
 	Or
 	<a href="/register" class="underline">sign up</a>

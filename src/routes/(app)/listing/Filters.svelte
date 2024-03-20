@@ -3,12 +3,13 @@
 	import * as Popover from '$lib/components/ui/popover';
 	import { Button } from '$lib/components/ui/button';
 	import { Slider } from '$lib/components/ui/slider';
+	import { t } from '$lib/translations';
 
 	const sizes = [
-		{ label: 'Small', value: 'sm' },
-		{ label: 'Medium', value: 'md' },
-		{ label: 'Large', value: 'lg' },
-		{ label: 'X-Large', value: 'xl' }
+		{ label: 'small', value: 'sm' },
+		{ label: 'medium', value: 'md' },
+		{ label: 'large', value: 'lg' },
+		{ label: 'xlarge', value: 'xl' }
 	];
 	export let size = '';
 	let minPrice = 0.5;
@@ -19,12 +20,12 @@
 </script>
 
 <div class="flex items-center gap-4 overflow-auto p-1 [&::-webkit-scrollbar]:hidden">
-	<p class="font-semibold">Filter:</p>
+	<p class="font-semibold">{$t('filter')}:</p>
 	<Popover.Root>
 		<Popover.Trigger>
 			<Button class="w-28">
 				{#if price[0] === minPrice && price[1] === maxPrice}
-					Price
+					{$t('price')}
 				{:else if price[0] === minPrice}
 					Max: {price[1]} M
 				{:else if price[1] === maxPrice}
@@ -47,7 +48,7 @@
 		<Popover.Trigger>
 			<Button class="w-28">
 				{#if distance[0] === maxDist}
-					Distance
+					{$t('distance')}
 				{:else}
 					Max: {distance[0]} km
 				{/if}
@@ -63,11 +64,11 @@
 
 	<Select.Root bind:selected={size}>
 		<Select.Trigger class="w-32 shrink-0">
-			<Select.Value placeholder="Sizes" />
+			<Select.Value placeholder={$t('sizes')} />
 		</Select.Trigger>
 		<Select.Content>
 			{#each sizes as size}
-				<Select.Item value={size.value}>{size.label}</Select.Item>
+				<Select.Item value={size.value}>{$t(size.label)}</Select.Item>
 			{/each}
 		</Select.Content>
 	</Select.Root>

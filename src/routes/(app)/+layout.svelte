@@ -5,6 +5,9 @@
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
 	import Menu from '~icons/material-symbols/menu-rounded';
 	import Account from '~icons/material-symbols/account-circle-full';
+	import I18n from '$lib/I18n.svelte';
+	import { t } from '$lib/translations';
+
 	export let data;
 </script>
 
@@ -13,16 +16,17 @@
 		<Unihouse />
 		<div class="flex-grow"></div>
 		{#if !data.user}
-			<Button class="hidden sm:block" variant="outline" href="/login">Login</Button>
-			<Button class="hidden sm:block" variant="outline" href="/register">Register</Button>
+			<Button class="hidden sm:block" variant="outline" href="/login">{$t('login')}</Button>
+			<Button class="hidden sm:block" variant="outline" href="/register">{$t('register')}</Button>
 			<Toggle />
+			<I18n></I18n>
 			<DropdownMenu.Root>
 				<DropdownMenu.Trigger asChild let:builder>
 					<Button class="sm:hidden" variant="ghost" builders={[builder]}><Menu /></Button>
 				</DropdownMenu.Trigger>
 				<DropdownMenu.Content class="w-56">
-					<DropdownMenu.Item href="/login">Login</DropdownMenu.Item>
-					<DropdownMenu.Item href="/register">Register</DropdownMenu.Item>
+					<DropdownMenu.Item href="/login">{$t('login')}</DropdownMenu.Item>
+					<DropdownMenu.Item href="/register">{$t('register')}</DropdownMenu.Item>
 				</DropdownMenu.Content>
 			</DropdownMenu.Root>
 		{:else}
@@ -32,6 +36,7 @@
 				<Account class="size-4" />
 			</Button>
 			<Toggle />
+			<I18n></I18n>
 			<DropdownMenu.Root>
 				<DropdownMenu.Trigger asChild let:builder>
 					<Button class="sm:hidden" size="icon" variant="ghost" builders={[builder]}

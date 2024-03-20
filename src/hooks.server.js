@@ -1,5 +1,5 @@
 import PocketBase from 'pocketbase';
-
+import { locale } from '$lib/translations';
 export async function handle({ event, resolve }) {
 	event.locals.pb = new PocketBase('https://uni.pockethost.io');
 
@@ -22,6 +22,10 @@ export async function handle({ event, resolve }) {
 
 	// send back the default 'pb_auth' cookie to the client with the latest store state
 	response.headers.append('set-cookie', event.locals.pb.authStore.exportToCookie());
-
+	const lang = event.request.headers.get('accept-language')?.split(',')[0];
+	if (lang) {
+		locale.set(lang);
+	}
+	resolve(event);
 	return response;
 }

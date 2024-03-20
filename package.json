@@ -47,6 +47,7 @@
 		"pocketbase": "^0.21.1",
 		"svelte-radix": "^1.0.1",
 		"svelte-sonner": "^0.3.18",
+		"sveltekit-i18n": "^2.4.2",
 		"tailwind-merge": "^2.2.1",
 		"tailwind-variants": "^0.2.0",
 		"valibot": "^0.29.0"
