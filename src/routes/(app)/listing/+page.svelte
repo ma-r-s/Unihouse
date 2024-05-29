@@ -38,7 +38,7 @@
 							{post.price.toLocaleString('en-US', { style: 'currency', currency: 'COP' })}
 							<!-- Esto no es correcto -->
 							<Badge>{post.size}</Badge>
-							{#if data.user.username == 'm.ruizs'}
+							{#if data?.user?.username == 'm.ruizs'}
 								<form method="POST" action="?/deletePost" use:enhance>
 									<input type="hidden" name="id" value={post.id} />
 									<Form.Button formaction="?/deletePost" variant="outline">Delete</Form.Button>
