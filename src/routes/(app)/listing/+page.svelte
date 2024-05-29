@@ -3,6 +3,9 @@
 	import { Separator } from '$lib/components/ui/separator';
 	import { Badge } from '$lib/components/ui/badge';
 	import Filters from './Filters.svelte';
+	import * as Form from '$lib/components/ui/form';
+	import Button from '$lib/components/ui/button/button.svelte';
+	import { enhance } from '$app/forms';
 	const getImageURL = (collectionId, recordId, fileName) => {
 		return `https://uni.pockethost.io/api/files/${collectionId}/${recordId}/${fileName}`;
 	};
@@ -20,6 +23,7 @@
 	{#each data.posts as post}
 		{#if size.value == '' || size.value === post.size}
 			{#if post.price >= price[0] * 1000000 && post.price <= price[1] * 1000000}
+				<!-- <a href="/listing/{post.id}"> -->
 				<Card.Root class="grow overflow-hidden">
 					<Card.Content>
 						<img
@@ -32,11 +36,19 @@
 						<Card.Title>{post.name}</Card.Title>
 						<div class="flex justify-between py-2">
 							{post.price.toLocaleString('en-US', { style: 'currency', currency: 'COP' })}
+							<!-- Esto no es correcto -->
 							<Badge>{post.size}</Badge>
+							{#if data?.user?.username == 'm.ruizs'}
+								<form method="POST" action="?/deletePost" use:enhance>
+									<input type="hidden" name="id" value={post.id} />
+									<Form.Button formaction="?/deletePost" variant="outline">Delete</Form.Button>
+								</form>
+							{/if}
 						</div>
 						<Card.Description class="line-clamp-3 text-pretty">{post.description}</Card.Description>
 					</Card.Header>
 				</Card.Root>
+				<!-- </a> -->
 			{/if}
 		{/if}
 	{/each}

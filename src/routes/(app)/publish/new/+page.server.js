@@ -3,7 +3,6 @@ import { superValidate } from 'sveltekit-superforms';
 import { formSchema } from './schema';
 import { valibot } from 'sveltekit-superforms/adapters';
 import { error } from '@sveltejs/kit';
-
 export const load = async ({ locals }) => {
 	if (!locals.pb.authStore.isValid) {
 		redirect(303, '/login');
