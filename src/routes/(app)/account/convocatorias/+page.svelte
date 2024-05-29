@@ -1,49 +1,11 @@
 <script lang="ts">
 	import * as Table from '$lib/components/ui/table/index.js';
 
-	const roommateListings = [
-		{
-			name: 'Alice Johnson',
-			age: 25,
-			gender: 'Female',
-			occupation: 'Software Engineer',
-			preferredLocation: 'Downtown',
-			budget: '$1000 - $1200'
-		},
-		{
-			name: 'Bob Smith',
-			age: 30,
-			gender: 'Male',
-			occupation: 'Graphic Designer',
-			preferredLocation: 'Suburb',
-			budget: '$800 - $1000'
-		},
-		{
-			name: 'Emma Brown',
-			age: 28,
-			gender: 'Female',
-			occupation: 'Teacher',
-			preferredLocation: 'City Center',
-			budget: '$1200 - $1400'
-		},
-		{
-			name: 'David Lee',
-			age: 27,
-			gender: 'Male',
-			occupation: 'Doctor',
-			preferredLocation: 'Waterfront',
-			budget: '$1500 - $1800'
-		},
-		{
-			name: 'Grace Taylor',
-			age: 29,
-			gender: 'Female',
-			occupation: 'Marketing Manager',
-			preferredLocation: 'Suburb',
-			budget: '$900 - $1100'
-		}
-		// Add more listings as needed
-	];
+	// Export the data received from the `load` function
+	export let data;
+
+	// Assign the received posts to a reactive variable
+	let roommateListings = data.posts;
 </script>
 
 <div class="w-full">
