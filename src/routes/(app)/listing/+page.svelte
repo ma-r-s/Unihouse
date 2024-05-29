@@ -7,10 +7,9 @@
 		return `https://uni.pockethost.io/api/files/${collectionId}/${recordId}/${fileName}`;
 	};
 
-	let size = '';
+	let size = { value: '' };
 	let price = [0.5, 5];
 	let distance = [10];
-
 	export let data;
 </script>
 
@@ -19,7 +18,7 @@
 
 <div class="grid w-full grid-cols-1 justify-between gap-4 px-6 md:grid-cols-2 xl:grid-cols-3">
 	{#each data.posts as post}
-		{#if size === '' || size.value === post.size}
+		{#if size.value == '' || size.value === post.size}
 			{#if post.price >= price[0] * 1000000 && post.price <= price[1] * 1000000}
 				<Card.Root class="grow overflow-hidden">
 					<Card.Content>

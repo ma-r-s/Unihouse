@@ -6,6 +6,7 @@
 	import { t } from '$lib/translations';
 
 	const sizes = [
+		{ label: 'any', value: '' },
 		{ label: 'small', value: 'sm' },
 		{ label: 'medium', value: 'md' },
 		{ label: 'large', value: 'lg' },
@@ -64,7 +65,7 @@
 
 	<Select.Root bind:selected={size}>
 		<Select.Trigger class="w-32 shrink-0">
-			<Select.Value placeholder={$t('sizes')} />
+			<Select.Value placeholder={$t('any')} />
 		</Select.Trigger>
 		<Select.Content>
 			{#each sizes as size}

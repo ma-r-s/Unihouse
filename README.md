@@ -24,8 +24,8 @@ UniHouse is a web application designed for university students in Bogota to find
 To get started with UniHouse, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/your-username/UniHouse.git`
-2. Install the dependencies: `pnpm i`
-3. Start the development server: `pnpm run dev`
+2. Install the dependencies: `bun i`
+3. Start the development server: `bun run dev`
 4. Open your browser and navigate to `http://localhost:5173`
 
 ## Contributing

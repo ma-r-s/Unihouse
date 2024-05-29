@@ -3,7 +3,6 @@
 	"register": "Register",
 	"price": "Price",
 	"distance": "Distance",
-	"sizes": "Sizes",
 	"small": "Small",
 	"medium": "Medium",
 	"large": "Large",
@@ -28,5 +27,6 @@
 	"confirmPassword": "Confirm Password",
 	"p-confirmPassword": "Re-enter your password",
 	"terms": "Accept terms and conditions",
-	"d-terms": "You can change your mind at any time by visiting your account settings."
+	"d-terms": "You can change your mind at any time by visiting your account settings.",
+	"any": "Any Size"
 }

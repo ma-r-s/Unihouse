@@ -3,7 +3,6 @@
 	"register": "Registrarse",
 	"price": "Precio",
 	"distance": "Distancia",
-	"sizes": "Tamaños",
 	"small": "Pequeño",
 	"medium": "Mediano",
 	"large": "Grande",
@@ -28,5 +27,6 @@
 	"confirmPassword": "Re-ingresa tu contraseña",
 	"p-confirmPassword": "Re-ingresa tu contraseña",
 	"terms": "Aceptar términos y condiciones",
-	"d-terms": "Puedes cambiar tu configuración en cualquier momento"
+	"d-terms": "Puedes cambiar tu configuración en cualquier momento",
+	"any": "Sin tamaño"
 }
